@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import carImg from '../../../images/login.jpg'
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firesbase.init'
+import SocialSignIn from '../../Shared/SocialSignIn/SocialSignIn';
 
 const Register = () => {
 
@@ -14,6 +15,10 @@ const Register = () => {
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
+    let getError;
+    if (error) {
+        getError = error.message;
+    }
 
     const handleRegisterForm = event => {
         event.preventDefault();
@@ -51,8 +56,10 @@ const Register = () => {
                                 <br />
                                 <Form.Control size="lg" type="password" name='password' placeholder="Password" required />
                                 <br />
+                                {getError}
                                 <button className='btn btn-secondary w-100 p-3' type="submit">Register</button>
                             </Form>
+                            <SocialSignIn></SocialSignIn>
                             <p className='mt-3 text-white '>Already a member?<Link className='text-success text-decoration-none ' to='/login'>Login here</Link></p>
                         </div>
                     </div>

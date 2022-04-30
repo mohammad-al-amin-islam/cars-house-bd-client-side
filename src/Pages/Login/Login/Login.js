@@ -4,6 +4,7 @@ import carImg from '../../../images/login.jpg'
 import { Link, useNavigate } from 'react-router-dom';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firesbase.init';
+import SocialSignIn from '../../Shared/SocialSignIn/SocialSignIn';
 
 const Login = () => {
     const [
@@ -12,6 +13,10 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+    let getError;
+    if (error) {
+        getError = error.message;
+    }
     const handleLoginForm = event => {
         event.preventDefault();
         const email = event.target.email.value;
@@ -45,8 +50,10 @@ const Login = () => {
                                 <br />
                                 <Form.Control size="lg" type="password" name='password' placeholder="Password" required />
                                 <br />
+                                {getError}
                                 <button className='btn btn-secondary w-100 p-3' type="submit">Log In</button>
                             </Form>
+                            <SocialSignIn></SocialSignIn>
                             <p className='mt-3 text-white '>Don't have an account? <Link className='text-success text-decoration-none ' to='/register'>Register here</Link></p>
                         </div>
                     </div>
