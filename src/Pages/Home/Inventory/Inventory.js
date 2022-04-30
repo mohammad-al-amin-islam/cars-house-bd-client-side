@@ -27,7 +27,7 @@ const Inventory = ({ inventory }) => {
                                 <p className='fw-bold'>Price:</p>
                                 <p className='fs-2 fw-bold text-info'>{price}</p>
                             </div>
-                            <p><span className='fw-bold'>Description:</span> {description.slice(0, 100) + ' ' + '...'}</p>
+                            <p><span className='fw-bold'>Description:</span> {description.slice(0, 90) + ' ' + '...'}</p>
                             <div className='text-center w-100 ' >
                                 <button onClick={() => navigate(`/inventory/${inventory._id}`)} type="button" className="btn btn-outline-secondary mx-auto">Update Stock</button>
                             </div>
