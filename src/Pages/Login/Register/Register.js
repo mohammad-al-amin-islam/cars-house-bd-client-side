@@ -1,25 +1,29 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
-import carImg from '../../../images/login.jpg'
 import { Link, useNavigate } from 'react-router-dom';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import auth from '../../../firesbase.init';
+import carImg from '../../../images/login.jpg'
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../../firesbase.init'
 
-const Login = () => {
+const Register = () => {
+
+    const navigate = useNavigate();
     const [
-        signInWithEmailAndPassword,
+        createUserWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useSignInWithEmailAndPassword(auth);
-    const handleLoginForm = event => {
+    ] = useCreateUserWithEmailAndPassword(auth);
+
+    const handleRegisterForm = event => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
         console.log(email, password);
-        signInWithEmailAndPassword(email, password);
+
+        createUserWithEmailAndPassword(email, password);
+
     }
-    const navigate = useNavigate();
     if (user) {
         navigate('/home');
     }
@@ -37,17 +41,19 @@ const Login = () => {
                         <div className='w-100 text-center shadow-lg px-5 py-3 rounded bg-info'>
                             <div className="text-white mt-3">
                                 <h3 >Cars House BD</h3>
-                                <h4>Log In Here</h4>
+                                <h4>Create An Cccount</h4>
                             </div>
 
-                            <Form onSubmit={handleLoginForm}>
+                            <Form onSubmit={handleRegisterForm}>
+                                <Form.Control size="lg" type="text" name='Full Name' placeholder="Full Name" required />
+                                <br />
                                 <Form.Control size="lg" type="text" name='email' placeholder="Email" required />
                                 <br />
                                 <Form.Control size="lg" type="password" name='password' placeholder="Password" required />
                                 <br />
-                                <button className='btn btn-secondary w-100 p-3' type="submit">Log In</button>
+                                <button className='btn btn-secondary w-100 p-3' type="submit">Register</button>
                             </Form>
-                            <p className='mt-3 text-white '>Don't have an account? <Link className='text-success text-decoration-none ' to='/register'>Register here</Link></p>
+                            <p className='mt-3 text-white '>Already a member?<Link className='text-success text-decoration-none ' to='/login'>Login here</Link></p>
                         </div>
                     </div>
                 </div>
@@ -56,4 +62,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
