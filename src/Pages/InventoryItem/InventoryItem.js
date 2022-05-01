@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const InventoryItem = () => {
     const { id } = useParams();
@@ -100,6 +100,10 @@ const InventoryItem = () => {
                         </div>
                     </div>
                 </div>
+                <div className="text-center mt-3">
+                    <Link className='text-decoration-none btn btn-secondary ' to='/manage-inventories'>Manage Inventories</Link>
+                </div>
+
             </div>
         </div>
     );
