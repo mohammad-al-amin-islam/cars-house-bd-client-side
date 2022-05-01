@@ -4,13 +4,67 @@ import { useParams } from 'react-router-dom';
 const InventoryItem = () => {
     const { id } = useParams();
     const [inventoryDetails, setInventoryDetails] = useState({});
+    const [isReload, setReload] = useState(false);
+
     const { image, name, price, quantity, sold, description, supplierName } = inventoryDetails;
     useEffect(() => {
         const url = `http://localhost:5000/inventories/${id}`
         fetch(url)
             .then(res => res.json())
             .then(data => setInventoryDetails(data))
-    }, [id]);
+    }, [id, isReload]);
+
+
+    //for delivery
+    const handleDeliverBtn = () => {
+        const updateQuantity = parseInt(inventoryDetails.quantity) - 1;
+        const data = { quantity: updateQuantity };
+        const url = `http://localhost:5000/inventories/${id}`
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                setReload(!isReload);
+
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+    };
+
+    //for update stock
+    const handleReStockForm = event => {
+        event.preventDefault();
+        const stock = parseInt(event.target.stock.value);
+        const updateQuantity = parseInt(inventoryDetails.quantity) + stock;
+        const data = { quantity: updateQuantity };
+        const url = `http://localhost:5000/inventories/${id}`
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                setReload(!isReload);
+
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        event.target.reset();
+    }
+
     return (
         <div className="bg-light">
             <div className='container py-5'>
@@ -30,13 +84,13 @@ const InventoryItem = () => {
                                 <p><span className='fw-bold'>Sold: </span>:{sold}</p>
                                 <p><span className='fw-bold'>Quantity: </span>:{quantity}</p>
                                 <div className='w-100 text-center'>
-                                    <button className='btn btn-success mb-5 '>Delivered</button>
-                                    <form>
+                                    <button onClick={handleDeliverBtn} className='btn btn-success mb-5 '>Delivered</button>
+                                    <form onSubmit={handleReStockForm}>
                                         <label className='mt-3 fw-bold' htmlFor="stock">Want to Restock Items?</label>
                                         <br />
                                         <input type="text" name="stock" placeholder='ReStock Quantity' />
                                         <br />
-                                        <input className='mt-3' type="submit" value="Add" />
+                                        <input className='mt-3 btn btn-success' type="submit" value="Add Items" />
                                     </form>
                                 </div>
                             </div>
