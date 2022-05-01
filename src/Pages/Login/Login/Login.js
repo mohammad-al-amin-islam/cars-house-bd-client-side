@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firesbase.init';
 import SocialSignIn from '../../Shared/SocialSignIn/SocialSignIn';
+import Loading from '../../Shared/Loading/Loading';
 
 const Login = () => {
     const [
@@ -13,9 +14,14 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+    const navigate = useNavigate();
+    const location = useLocation();
     let getError;
     if (error) {
         getError = error.message;
+    }
+    if (loading) {
+        return <Loading></Loading>
     }
     const handleLoginForm = event => {
         event.preventDefault();
@@ -24,8 +30,7 @@ const Login = () => {
         console.log(email, password);
         signInWithEmailAndPassword(email, password);
     }
-    const navigate = useNavigate();
-    const location = useLocation();
+
     let from = location.state?.from?.pathname || "/";
 
     if (user) {

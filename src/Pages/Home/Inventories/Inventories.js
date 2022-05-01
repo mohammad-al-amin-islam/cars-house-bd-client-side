@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import useInventories from '../../../hooks/useInventories';
 import Inventory from '../Inventory/Inventory';
-
 const Inventories = () => {
 
     const [inventories] = useInventories();

@@ -1,17 +1,21 @@
 import React, { useEffect } from 'react';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firesbase.init';
 import googleLogo from '../../../images/google.png'
 
 const SocialSignIn = () => {
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
     const navigate = useNavigate();
+    const location = useLocation();
+
+    let from = location.state?.from?.pathname || "/";
+
     useEffect(() => {
         if (user) {
-            navigate('/home');
+            navigate(from, { replace: true });
         }
-    }, [user, navigate]);
+    }, [user, navigate, from]);
 
     let getError;
     if (error) {

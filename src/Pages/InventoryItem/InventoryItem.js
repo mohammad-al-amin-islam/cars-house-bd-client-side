@@ -42,27 +42,30 @@ const InventoryItem = () => {
     //for update stock
     const handleReStockForm = event => {
         event.preventDefault();
-        const stock = parseInt(event.target.stock.value);
-        const updateQuantity = parseInt(inventoryDetails.quantity) + stock;
-        const data = { quantity: updateQuantity };
-        const url = `http://localhost:5000/inventories/${id}`
-        fetch(url, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                setReload(!isReload);
-
+        const stock = event.target.stock.value;
+        if (stock) {
+            const updateQuantity = parseInt(inventoryDetails.quantity) + parseInt(stock);
+            const data = { quantity: updateQuantity };
+            const url = `http://localhost:5000/inventories/${id}`
+            fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
             })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        event.target.reset();
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    setReload(!isReload);
+
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            event.target.reset();
+        }
+
     }
 
     return (
