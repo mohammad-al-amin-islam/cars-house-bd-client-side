@@ -9,6 +9,8 @@ import RequireAuth from './Pages/RequireAuth/RequireAuth';
 import ManageInventories from './Pages/ManageInventories/ManageInventories/ManageInventories';
 import AddItems from './Pages/AddItems/AddItems';
 import MyItems from './Pages/My Items/MyItems';
+import NotFound from './Pages/Shared/NotFound/NotFound';
+import Footer from './Pages/Shared/Footer/Footer';
 
 function App() {
   return (
@@ -39,7 +41,9 @@ function App() {
         }></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
+        <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
+      <Footer></Footer>
     </div>
   );
 }
