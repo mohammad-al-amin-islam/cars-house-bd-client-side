@@ -17,8 +17,14 @@ const Header = () => {
                     <Nav className='ms-auto'>
                         <Nav.Link as={Link} to='/home'>Home</Nav.Link>
                         {
+                            user && <>
+                                <Nav.Link as={Link} to='/manage-inventories'>Manage Items</Nav.Link>
+                                <Nav.Link as={Link} to='/add-items'>Add Item</Nav.Link>
+                            </>
+                        }
+                        {
                             user ?
-                                <button onClick={() => signOut(auth)} className='btn btn-link text-decoration-none text-white'>Logout</button>
+                                <button onClick={() => signOut(auth)} className='btn btn-link text-decoration-none text-light'>Logout</button>
                                 :
                                 <Nav.Link as={Link} to='/login'>Login</Nav.Link>
 

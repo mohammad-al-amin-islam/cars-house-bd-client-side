@@ -7,6 +7,7 @@ import Register from './Pages/Login/Register/Register';
 import InventoryItem from './Pages/InventoryItem/InventoryItem';
 import RequireAuth from './Pages/RequireAuth/RequireAuth';
 import ManageInventories from './Pages/ManageInventories/ManageInventories/ManageInventories';
+import AddItems from './Pages/AddItems/AddItems';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         }
         ></Route>
         <Route path='/manage-inventories' element={<ManageInventories></ManageInventories>}></Route>
+        <Route path='/add-items' element={<AddItems></AddItems>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
       </Routes>

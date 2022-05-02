@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import useInventories from '../../../hooks/useInventories';
 import Manageinventory from '../ManageInventory/Manageinventory';
 
@@ -28,6 +29,9 @@ const ManageInventories = () => {
                     handleDeleteBtn={handleDeleteBtn}
                 ></Manageinventory>)
             }
+            <div className="text-center mt-3">
+                <Link className='text-decoration-none btn btn-secondary ' to='/add-items'>Add New Item</Link>
+            </div>
         </div>
     );
 };
