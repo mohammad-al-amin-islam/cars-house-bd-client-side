@@ -1,0 +1,8 @@
+.bg-img {
+    background-image: url(../../../images/count.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.5);
+}
