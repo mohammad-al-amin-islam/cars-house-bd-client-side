@@ -6,7 +6,7 @@ import Manageinventory from '../ManageInventory/Manageinventory';
 const ManageInventories = () => {
     const [inventories, setInventories] = useInventories();
     const handleDeleteBtn = id => {
-        const confirm = window.confirm();
+        const confirm = window.confirm('Want to delete this item');
         if (confirm) {
             const url = `http://localhost:5000/inventory-delete/${id}`
             fetch(url, {

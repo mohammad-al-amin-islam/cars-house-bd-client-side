@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Form } from 'react-bootstrap';
 import carImg from '../../../images/login.jpg'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firesbase.init';
 import SocialSignIn from '../../Shared/SocialSignIn/SocialSignIn';
 import Loading from '../../Shared/Loading/Loading';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const [
@@ -15,8 +17,13 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+    const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(
+        auth
+    );
+
     const navigate = useNavigate();
     const location = useLocation();
+    const emailRef = useRef('');
     let getError;
     if (error) {
         getError = error.message;
@@ -40,6 +47,17 @@ const Login = () => {
     if (user) {
         // navigate(from, { replace: true });
     }
+    const handleResetBtn = async event => {
+        const resetEmail = emailRef.current.value;
+        if (resetEmail) {
+            await sendPasswordResetEmail(resetEmail);
+            toast('Reset Email Sent');
+        }
+        else {
+            toast('Please Give Email first');
+        }
+
+    }
     return (
         <div className="bg-light w-100 d-flex align-items-center" style={{ height: '100vh' }}>
             <div className='container '>
@@ -58,11 +76,12 @@ const Login = () => {
                             </div>
 
                             <Form onSubmit={handleLoginForm}>
-                                <Form.Control size="lg" type="text" name='email' placeholder="Email" required />
+                                <Form.Control ref={emailRef} size="lg" type="text" name='email' placeholder="Email" required />
                                 <br />
                                 <Form.Control size="lg" type="password" name='password' placeholder="Password" required />
                                 <br />
                                 {getError}
+                                <p className='fw-bold'>Forgot Password? <button onClick={handleResetBtn} className='btn btn-link fw-bold text-success text-decoration-none'>Reset Here</button></p>
                                 <button className='btn btn-secondary w-100 p-3' type="submit">Log In</button>
                             </Form>
                             <SocialSignIn></SocialSignIn>
@@ -70,6 +89,7 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
+                <ToastContainer></ToastContainer>
             </div>
         </div>
     );
