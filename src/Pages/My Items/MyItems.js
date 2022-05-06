@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firesbase.init';
 import Manageinventory from '../ManageInventories/ManageInventory/Manageinventory';
-// import useInventories from '../../hooks/useInventories';
+import Loading from '../Shared/Loading/Loading'
 
 const MyItems = () => {
     const [myItems, setMyItems] = useState([]);
-    const [user] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
+    useEffect(() => {
+        if (loading) {
+            return <Loading></Loading>
+        }
+    }, [])
     const email = user?.email;
     useEffect(() => {
         const url = `http://localhost:5000/myinventories?email=${email}`
@@ -30,13 +35,15 @@ const MyItems = () => {
     }
     return (
         <div className='container'>
-            <h1 className='text-center text-primary text-uppercase mt-3'>My Items List</h1>
+            <h2 className='text-center text-primary text-uppercase mt-3 fw-bold'>My Items List</h2>
             {
-                myItems.map(inventory => <Manageinventory
-                    key={inventory._id}
-                    inventory={inventory}
-                    handleDeleteBtn={handleDeleteBtn}
-                ></Manageinventory>)
+                myItems.length === 0 ?
+                    <h1 className='text-center text-danger mt-5'>No Items Added Yet </h1>
+                    : myItems.map(inventory => <Manageinventory
+                        key={inventory._id}
+                        inventory={inventory}
+                        handleDeleteBtn={handleDeleteBtn}
+                    ></Manageinventory>)
             }
         </div>
     );

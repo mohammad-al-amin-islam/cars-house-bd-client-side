@@ -7,7 +7,7 @@ const Inventories = () => {
 
     return (
         <div className='mt-5'>
-            <h1 className='text-center my-3'>Inventory Items:{inventories.length}</h1>
+            <h1 className='text-center text-success fw-bold my-3'>Inventory Items:{inventories.length}</h1>
             <div className='bg-light '>
                 <div className="container mt-5 py-3">
                     <div className="row row-cols-sm--1 row-cols-lg-3 g-4">

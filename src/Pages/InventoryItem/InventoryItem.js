@@ -87,7 +87,10 @@ const InventoryItem = () => {
                                 <p><span className='fw-bold'>Sold: </span>:{sold}</p>
                                 <p><span className='fw-bold'>Quantity: </span>:{quantity}</p>
                                 <div className='w-100 text-center'>
-                                    <button onClick={handleDeliverBtn} className='btn btn-success mb-5 '>Delivered</button>
+                                    {/* <button onClick={handleDeliverBtn} className='btn btn-success mb-5 '>Delivered</button> */}
+                                    {
+                                        inventoryDetails.quantity <= 0 ? <button className='btn btn-danger fw-bold'>Item sold</button> : <button onClick={handleDeliverBtn} className='btn btn-success mb-5 '>Delivered</button>
+                                    }
                                     <form onSubmit={handleReStockForm}>
                                         <label className='mt-3 fw-bold' htmlFor="stock">Want to Restock Items?</label>
                                         <br />
