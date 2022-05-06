@@ -6,6 +6,7 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firesbase.init';
 import SocialSignIn from '../../Shared/SocialSignIn/SocialSignIn';
 import Loading from '../../Shared/Loading/Loading';
+import axios from 'axios';
 
 const Login = () => {
     const [
@@ -23,18 +24,21 @@ const Login = () => {
     if (loading) {
         return <Loading></Loading>
     }
-    const handleLoginForm = event => {
+    const handleLoginForm = async event => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
         console.log(email, password);
-        signInWithEmailAndPassword(email, password);
+        await signInWithEmailAndPassword(email, password);
+        const { data } = await axios.post('http://localhost:5000/jwtlogin', { email });
+        localStorage.setItem('accessToken', data.token);
+        navigate(from, { replace: true });
     }
 
     let from = location.state?.from?.pathname || "/";
 
     if (user) {
-        navigate(from, { replace: true });
+        // navigate(from, { replace: true });
     }
     return (
         <div className="bg-light w-100 d-flex align-items-center" style={{ height: '100vh' }}>

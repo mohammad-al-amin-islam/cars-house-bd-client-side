@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firesbase.init';
@@ -7,17 +8,23 @@ import Loading from '../Shared/Loading/Loading'
 const MyItems = () => {
     const [myItems, setMyItems] = useState([]);
     const [user, loading] = useAuthState(auth);
+    const email = user?.email;
     useEffect(() => {
         if (loading) {
             return <Loading></Loading>
         }
-    }, [])
-    const email = user?.email;
+    }, [loading]);
     useEffect(() => {
-        const url = `http://localhost:5000/myinventories?email=${email}`
-        fetch(url)
-            .then(res => res.json())
-            .then(data => setMyItems(data));
+        const getMyItems = async () => {
+            const url = `http://localhost:5000/myinventories?email=${email}`
+            const { data } = await axios.get(url, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
+            setMyItems(data);
+        }
+        getMyItems()
     }, [email]);
     const handleDeleteBtn = id => {
         const confirm = window.confirm('Are Sure To Delete This Item');
