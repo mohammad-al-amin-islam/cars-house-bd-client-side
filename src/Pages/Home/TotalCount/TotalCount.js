@@ -11,7 +11,7 @@ const TotalCount = () => {
                 <div className="col-sm-12 col-lg-4">
                     <VisibilitySensor>
                         {({ isVisible }) => (
-                            <div className='text-center text-info'>
+                            <div className='text-center text-white'>
                                 <CurrencyBangladeshiIcon className='w-25 ' />
                                 <h1> {isVisible ? <CountUp end={750000} /> : null}</h1>
                                 <p className='fw-bold'>Amount Sold</p>
@@ -22,7 +22,7 @@ const TotalCount = () => {
                 <div className="col-sm-12 col-lg-4">
                     <VisibilitySensor>
                         {({ isVisible }) => (
-                            <div className='text-center text-info'>
+                            <div className='text-center text-white'>
                                 <UsersIcon className='w-25'></UsersIcon>
                                 <h1> {isVisible ? <CountUp start={0} end={100} /> : null}%</h1>
                                 <p className='fw-bold'>Customer Satisfaction</p>
@@ -33,7 +33,7 @@ const TotalCount = () => {
                 <div className="col-sm-12 col-lg-4">
                     <VisibilitySensor>
                         {({ isVisible }) => (
-                            <div className='text-center text-info'>
+                            <div className='text-center text-white'>
                                 <CheckCircleIcon className='w-25 ' />
                                 <h1> {isVisible ? <CountUp end={500} /> : null}</h1>
                                 <p className='fw-bold'>Car Sold</p>

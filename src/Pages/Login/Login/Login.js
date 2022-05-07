@@ -17,7 +17,7 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
-    const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(
+    const [sendPasswordResetEmail, sending, anotherError] = useSendPasswordResetEmail(
         auth
     );
 
@@ -25,10 +25,10 @@ const Login = () => {
     const location = useLocation();
     const emailRef = useRef('');
     let getError;
-    if (error) {
-        getError = error.message;
+    if (error || anotherError) {
+        getError = <p>{error?.message}{anotherError?.message}</p>
     }
-    if (loading) {
+    if (loading || sending) {
         return <Loading></Loading>
     }
     const handleLoginForm = async event => {
