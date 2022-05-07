@@ -35,7 +35,7 @@ const AddItems = () => {
     return (
         <div className='w-50 mx-auto'>
             <h2 className='text-center text-primary text-uppercase fw-bold mt-3'>Add Items to Inventory</h2>
-            <form className='d-flex flex-column' onSubmit={handleSubmit(onSubmit)}>
+            <form className='d-flex flex-column mb-3' onSubmit={handleSubmit(onSubmit)}>
                 <input className='mb-3 p-2' placeholder='Inventory Item Name' {...register("name", { required: true, maxLength: 70 })} />
                 <input className='mb-3 p-2' placeholder='Price' type="number" {...register("price")} />
                 <input className='mb-3 p-2' placeholder='Quantity' type="number" {...register("quantity")} />

@@ -30,7 +30,7 @@ const ManageInventories = () => {
                 ></Manageinventory>)
             }
             <div className="text-center mt-3">
-                <Link className='text-decoration-none btn btn-secondary ' to='/add-items'>Add New Item</Link>
+                <Link className='text-decoration-none btn btn-secondary mb-3' to='/add-items'>Add New Item</Link>
             </div>
         </div>
     );

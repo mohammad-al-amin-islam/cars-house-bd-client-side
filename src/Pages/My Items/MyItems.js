@@ -1,6 +1,8 @@
 import axios from 'axios';
+import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 import auth from '../../firesbase.init';
 import Manageinventory from '../ManageInventories/ManageInventory/Manageinventory';
 import Loading from '../Shared/Loading/Loading'
@@ -8,6 +10,7 @@ import Loading from '../Shared/Loading/Loading'
 const MyItems = () => {
     const [myItems, setMyItems] = useState([]);
     const [user, loading] = useAuthState(auth);
+    const navigate = useNavigate();
     const email = user?.email;
     useEffect(() => {
         if (loading) {
@@ -17,15 +20,24 @@ const MyItems = () => {
     useEffect(() => {
         const getMyItems = async () => {
             const url = `http://localhost:5000/myinventories?email=${email}`
-            const { data } = await axios.get(url, {
-                headers: {
-                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            try {
+                const { data } = await axios.get(url, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                    }
+                })
+                setMyItems(data);
+            }
+            catch (error) {
+                if (error.response.status === 401 || error.response.status === 403) {
+                    signOut(auth);
+                    navigate('/login');
                 }
-            })
-            setMyItems(data);
+            }
+
         }
-        getMyItems()
-    }, [email]);
+        getMyItems();
+    }, [email, navigate]);
     const handleDeleteBtn = id => {
         const confirm = window.confirm('Are Sure To Delete This Item');
         if (confirm) {
