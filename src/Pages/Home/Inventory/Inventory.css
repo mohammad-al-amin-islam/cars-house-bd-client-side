@@ -1,0 +1,4 @@
+.item-focus:hover {
+    box-shadow: 5px 5px 5px 5px #888888;
+    transition: .3s;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import './Inventory.css'
 import { useNavigate } from 'react-router-dom';
 
 const Inventory = ({ inventory }) => {
@@ -8,7 +9,7 @@ const Inventory = ({ inventory }) => {
         <div>
             <div className="col">
 
-                <div className="card h-100 border-0 shadow round" style={{ borderRadius: '20px' }}>
+                <div className="card h-100 border-0 item-focus round" style={{ borderRadius: '20px' }}>
                     <div>
                         <h2 className='p-2 text-secondary'>{name}</h2>
                     </div>
@@ -29,7 +30,7 @@ const Inventory = ({ inventory }) => {
                             </div>
                             <p><span className='fw-bold'>Description:</span> {description.slice(0, 90) + ' ' + '...'}</p>
                             <div className='text-center w-100 ' >
-                                <button onClick={() => navigate(`/inventory/${inventory._id}`)} type="button" className="btn btn-outline-secondary mx-auto">Update Stock</button>
+                                <button onClick={() => navigate(`/inventory/${inventory._id}`)} type="button" className="btn btn-outline-secondary mx-auto fw-bold">Update Stock</button>
                             </div>
                         </div>
                     </div>

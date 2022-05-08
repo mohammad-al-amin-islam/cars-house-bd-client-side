@@ -26,7 +26,7 @@ const AddItems = () => {
             .then(response => response.json())
             .then(result => {
                 // console.log('Success:', result);
-                navigate('/home');
+                navigate('/my-items');
             })
             .catch((error) => {
                 // console.error('Error:', error);

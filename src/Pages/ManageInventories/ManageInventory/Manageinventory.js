@@ -5,7 +5,7 @@ const Manageinventory = ({ inventory, handleDeleteBtn }) => {
     const { _id, name, image, quantity } = inventory;
     return (
         <div>
-            <div className='bg-info rounded text-center d-lg-flex justify-content-between my-3 shadow p-3'>
+            <div className='bg-info rounded item-focus text-center d-lg-flex justify-content-between my-3  p-3'>
                 <div className='rounded'>
                     <img width='200px' src={image} alt="" />
                 </div>
