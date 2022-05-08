@@ -5,8 +5,10 @@ import Manageinventory from '../ManageInventory/Manageinventory';
 
 const ManageInventories = () => {
     const [inventories, setInventories] = useInventories();
+
+    //delete data from inventories
     const handleDeleteBtn = id => {
-        const confirm = window.confirm('Want to delete this item');
+        const confirm = window.confirm('Want to delete this item?');
         if (confirm) {
             const url = `https://pure-thicket-30594.herokuapp.com/inventory-delete/${id}`
             fetch(url, {

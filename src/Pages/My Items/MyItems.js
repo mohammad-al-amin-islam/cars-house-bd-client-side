@@ -38,8 +38,10 @@ const MyItems = () => {
         }
         getMyItems();
     }, [email, navigate]);
+
+    //delete data from my items
     const handleDeleteBtn = id => {
-        const confirm = window.confirm('Are Sure To Delete This Item');
+        const confirm = window.confirm('Want to delete this item?');
         if (confirm) {
             const url = `https://pure-thicket-30594.herokuapp.com/inventory-delete/${id}`
             fetch(url, {

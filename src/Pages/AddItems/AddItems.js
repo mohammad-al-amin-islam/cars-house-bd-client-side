@@ -25,16 +25,16 @@ const AddItems = () => {
         })
             .then(response => response.json())
             .then(result => {
-                console.log('Success:', result);
+                // console.log('Success:', result);
                 navigate('/home');
             })
             .catch((error) => {
-                console.error('Error:', error);
+                // console.error('Error:', error);
             });
     };
     return (
-        <div className='w-50 mx-auto'>
-            <h2 className='text-center text-primary text-uppercase fw-bold mt-3'>Add Items to Inventory</h2>
+        <div className='about-area mx-auto bg-info p-2 m-3'>
+            <h2 className='text-center text-white text-uppercase fw-bold mt-3'>Add Items to Inventory</h2>
             <form className='d-flex flex-column mb-3' onSubmit={handleSubmit(onSubmit)}>
                 <input className='mb-3 p-2' placeholder='Inventory Item Name' {...register("name", { required: true, maxLength: 70 })} />
                 <input className='mb-3 p-2' placeholder='Price' type="number" {...register("price")} />
@@ -43,7 +43,7 @@ const AddItems = () => {
                 <input className='mb-3 p-2' type="text" value={user.email}{...register('email')} readOnly />
                 <input className='mb-3 p-2' placeholder='Photo URL' type="text" {...register("image")} />
                 <textarea className='mb-3 p-2' placeholder='Give Description' type="text" {...register("description")} />
-                <input type="submit" value='Add Item' />
+                <input className='w-50 p-2 fw-bold mx-auto text-success' type="submit" value='Add Item' />
             </form>
         </div>
     );
