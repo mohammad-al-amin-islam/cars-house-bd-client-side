@@ -8,7 +8,7 @@ const ManageInventories = () => {
     const handleDeleteBtn = id => {
         const confirm = window.confirm('Want to delete this item');
         if (confirm) {
-            const url = `http://localhost:5000/inventory-delete/${id}`
+            const url = `https://pure-thicket-30594.herokuapp.com/inventory-delete/${id}`
             fetch(url, {
                 method: 'DELETE',
             })

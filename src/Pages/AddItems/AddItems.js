@@ -15,7 +15,7 @@ const AddItems = () => {
 
     const onSubmit = data => {
         console.log(data);
-        const url = 'http://localhost:5000/inventories'
+        const url = 'https://pure-thicket-30594.herokuapp.com/inventories'
         fetch(url, {
             method: 'POST',
             headers: {

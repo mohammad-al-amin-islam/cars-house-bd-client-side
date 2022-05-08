@@ -4,7 +4,7 @@ import myImg from '../../images/me1.jpg'
 
 const AboutMySelf = () => {
     return (
-        <div className='w-100 my-4 '>
+        <div className='w-100 py-4 bg-light'>
             <div className='about-area mx-auto shadow-lg p-3 rounded'>
                 <h2 className='text-center text-primary text-uppercase fw-bold'>About MySelf</h2>
                 <div className=''>

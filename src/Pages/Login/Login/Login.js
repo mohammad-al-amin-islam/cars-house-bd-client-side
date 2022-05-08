@@ -37,7 +37,7 @@ const Login = () => {
         const password = event.target.password.value;
         console.log(email, password);
         await signInWithEmailAndPassword(email, password);
-        const { data } = await axios.post('http://localhost:5000/jwtlogin', { email });
+        const { data } = await axios.post('https://pure-thicket-30594.herokuapp.com/jwtlogin', { email });
         localStorage.setItem('accessToken', data.token);
         navigate(from, { replace: true });
     }

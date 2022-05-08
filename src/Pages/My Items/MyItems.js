@@ -19,7 +19,7 @@ const MyItems = () => {
     }, [loading]);
     useEffect(() => {
         const getMyItems = async () => {
-            const url = `http://localhost:5000/myinventories?email=${email}`
+            const url = `https://pure-thicket-30594.herokuapp.com/myinventories?email=${email}`
             try {
                 const { data } = await axios.get(url, {
                     headers: {
@@ -41,7 +41,7 @@ const MyItems = () => {
     const handleDeleteBtn = id => {
         const confirm = window.confirm('Are Sure To Delete This Item');
         if (confirm) {
-            const url = `http://localhost:5000/inventory-delete/${id}`
+            const url = `https://pure-thicket-30594.herokuapp.com/inventory-delete/${id}`
             fetch(url, {
                 method: 'DELETE',
             })

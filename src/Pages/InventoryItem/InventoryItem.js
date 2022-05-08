@@ -8,7 +8,7 @@ const InventoryItem = () => {
 
     const { image, name, price, quantity, sold, description, supplierName } = inventoryDetails;
     useEffect(() => {
-        const url = `http://localhost:5000/inventories/${id}`
+        const url = `https://pure-thicket-30594.herokuapp.com/inventories/${id}`
         fetch(url)
             .then(res => res.json())
             .then(data => setInventoryDetails(data))
@@ -19,7 +19,7 @@ const InventoryItem = () => {
     const handleDeliverBtn = () => {
         const updateQuantity = parseInt(inventoryDetails.quantity) - 1;
         const data = { quantity: updateQuantity };
-        const url = `http://localhost:5000/inventories/${id}`
+        const url = `https://pure-thicket-30594.herokuapp.com/inventories/${id}`
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -29,7 +29,7 @@ const InventoryItem = () => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log('Success:', data);
+                // console.log('Success:', data);
                 setReload(!isReload);
 
             })
@@ -46,7 +46,7 @@ const InventoryItem = () => {
         if (stock) {
             const updateQuantity = parseInt(inventoryDetails.quantity) + parseInt(stock);
             const data = { quantity: updateQuantity };
-            const url = `http://localhost:5000/inventories/${id}`
+            const url = `https://pure-thicket-30594.herokuapp.com/inventories/${id}`
             fetch(url, {
                 method: 'PUT',
                 headers: {
@@ -56,7 +56,7 @@ const InventoryItem = () => {
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Success:', data);
+                    // console.log('Success:', data);
                     setReload(!isReload);
 
                 })
