@@ -14,10 +14,17 @@
 * And in blogs there is some question answer and in about there is short description about me.
 
 ## Technologies Used
+#### For client Side
+* React JS
 * Firebase
 * React Firebase hooks
 * Bootstarp
 * React Toastify
 * React Router
+
+#### For server Side
+* MongoDB
+* NodeJS
+* Express JS
 
 
