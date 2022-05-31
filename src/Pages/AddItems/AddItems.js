@@ -2,11 +2,12 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 import auth from '../../firesbase.init';
 import Loading from '../Shared/Loading/Loading';
 
 const AddItems = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
     const [user, loading] = useAuthState(auth);
     const navigate = useNavigate();
     if (loading) {
@@ -26,7 +27,9 @@ const AddItems = () => {
             .then(response => response.json())
             .then(result => {
                 // console.log('Success:', result);
-                navigate('/my-items');
+                // navigate('/my-items');
+                toast.success('Items Added Succesfully');
+                reset();
             })
             .catch((error) => {
                 // console.error('Error:', error);
@@ -45,6 +48,7 @@ const AddItems = () => {
                 <textarea className='mb-3 p-2' placeholder='Give Description' type="text" {...register("description")} />
                 <input className='w-50 p-2 fw-bold mx-auto text-success' type="submit" value='Add Item' />
             </form>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };

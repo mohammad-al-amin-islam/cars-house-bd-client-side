@@ -3,6 +3,7 @@ import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 import auth from '../../firesbase.init';
 import Manageinventory from '../ManageInventories/ManageInventory/Manageinventory';
 import Loading from '../Shared/Loading/Loading'
@@ -51,6 +52,7 @@ const MyItems = () => {
                 .then(data => {
                     const rest = myItems.filter(inventory => inventory._id !== id)
                     setMyItems(rest);
+                    toast.success('Items Deleted Successfully');
                 })
         }
     }
@@ -66,6 +68,7 @@ const MyItems = () => {
                         handleDeleteBtn={handleDeleteBtn}
                     ></Manageinventory>)
             }
+            <ToastContainer></ToastContainer>
         </div>
     );
 };

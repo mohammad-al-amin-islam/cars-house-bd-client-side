@@ -5,6 +5,7 @@ import carImg from '../../../images/login.jpg'
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firesbase.init'
 import SocialSignIn from '../../Shared/SocialSignIn/SocialSignIn';
+import useToken from '../../../hooks/useToken';
 
 const Register = () => {
 
@@ -15,6 +16,9 @@ const Register = () => {
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+
+    const [token] = useToken(user);
+
     let getError;
     if (error) {
         getError = error.message;
@@ -29,7 +33,7 @@ const Register = () => {
         createUserWithEmailAndPassword(email, password);
 
     }
-    if (user) {
+    if (token) {
         navigate('/home');
     }
     return (

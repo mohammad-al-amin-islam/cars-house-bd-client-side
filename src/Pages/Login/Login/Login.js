@@ -9,6 +9,7 @@ import Loading from '../../Shared/Loading/Loading';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useToken from '../../../hooks/useToken';
 
 const Login = () => {
     const [
@@ -20,6 +21,8 @@ const Login = () => {
     const [sendPasswordResetEmail, sending, anotherError] = useSendPasswordResetEmail(
         auth
     );
+
+    const [token] = useToken(user);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -37,15 +40,15 @@ const Login = () => {
         const password = event.target.password.value;
         console.log(email, password);
         await signInWithEmailAndPassword(email, password);
-        const { data } = await axios.post('https://pure-thicket-30594.herokuapp.com/jwtlogin', { email });
-        localStorage.setItem('accessToken', data.token);
-        navigate(from, { replace: true });
+        // const { data } = await axios.post('https://pure-thicket-30594.herokuapp.com/jwtlogin', { email });
+        // localStorage.setItem('accessToken', data.token);
+        // navigate(from, { replace: true });
     }
 
     let from = location.state?.from?.pathname || "/";
 
-    if (user) {
-        // navigate(from, { replace: true });
+    if (token) {
+        navigate(from, { replace: true });
     }
     const handleResetBtn = async event => {
         const resetEmail = emailRef.current.value;
