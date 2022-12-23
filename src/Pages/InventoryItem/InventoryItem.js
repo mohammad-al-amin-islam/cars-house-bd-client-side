@@ -9,7 +9,7 @@ const InventoryItem = () => {
   const { image, name, price, quantity, sold, description, supplierName } =
     inventoryDetails;
   useEffect(() => {
-    const url = `https://cars-house-bd-server-side-production.up.railway.app/inventories/${id}`;
+    const url = `https://cars-house-bd-server-side.onrender.com/inventories/${id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setInventoryDetails(data));
@@ -19,7 +19,7 @@ const InventoryItem = () => {
   const handleDeliverBtn = () => {
     const updateQuantity = parseInt(inventoryDetails.quantity) - 1;
     const data = { quantity: updateQuantity };
-    const url = `https://cars-house-bd-server-side-production.up.railway.app/inventories/${id}`;
+    const url = `https://cars-house-bd-server-side.onrender.com/inventories/${id}`;
     fetch(url, {
       method: "PUT",
       headers: {
@@ -45,7 +45,7 @@ const InventoryItem = () => {
       const updateQuantity =
         parseInt(inventoryDetails.quantity) + parseInt(stock);
       const data = { quantity: updateQuantity };
-      const url = `https://cars-house-bd-server-side-production.up.railway.app/inventories/${id}`;
+      const url = `https://cars-house-bd-server-side.onrender.com/inventories/${id}`;
       fetch(url, {
         method: "PUT",
         headers: {

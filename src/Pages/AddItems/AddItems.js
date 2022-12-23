@@ -16,8 +16,7 @@ const AddItems = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    const url =
-      "https://cars-house-bd-server-side-production.up.railway.app/inventories";
+    const url = "https://cars-house-bd-server-side.onrender.com/inventories";
     fetch(url, {
       method: "POST",
       headers: {

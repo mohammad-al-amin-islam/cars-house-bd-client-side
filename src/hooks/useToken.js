@@ -7,7 +7,7 @@ const useToken = (user) => {
       const email = user?.user?.email;
       if (email) {
         const { data } = await axios.post(
-          "https://cars-house-bd-server-side-production.up.railway.app/jwtlogin",
+          "https://cars-house-bd-server-side.onrender.com/jwtlogin",
           { email }
         );
         setToken(data.token);

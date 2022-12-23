@@ -20,7 +20,7 @@ const MyItems = () => {
   }, [loading]);
   useEffect(() => {
     const getMyItems = async () => {
-      const url = `https://cars-house-bd-server-side-production.up.railway.app/myinventories?email=${email}`;
+      const url = `https://cars-house-bd-server-side.onrender.com/myinventories?email=${email}`;
       try {
         const { data } = await axios.get(url, {
           headers: {
@@ -42,7 +42,7 @@ const MyItems = () => {
   const handleDeleteBtn = (id) => {
     const confirm = window.confirm("Want to delete this item?");
     if (confirm) {
-      const url = `https://cars-house-bd-server-side-production.up.railway.app/inventory-delete/${id}`;
+      const url = `https://cars-house-bd-server-side.onrender.com/inventory-delete/${id}`;
       fetch(url, {
         method: "DELETE",
       })
